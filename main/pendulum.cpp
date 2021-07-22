@@ -10,8 +10,8 @@ void SinglePendulum::drawPendulum(QPainter& qp) {
 
     // TODO: better way of scaling up
     // instead of literal 400 below
-    int bobX = pivotX + (l * 400) * sinf(theta);
-    int bobY = pivotY + (l * 400) * cosf(theta);
+    int bobX = pivotX + (l * 300) * sinf(theta);
+    int bobY = pivotY + (l * 300) * cosf(theta);
 
     // Draw pendulum
     // TODO: don't create new QPen everytime;

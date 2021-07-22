@@ -14,8 +14,6 @@ protected:
 };
 
 
-
-
 class SinglePendulum : public Pendulum {
 public:
     void drawPendulum(QPainter& qp);
@@ -25,7 +23,7 @@ public:
 private:
     float m = 1; // Mass of bob [kg]
     float l = 1; // Length of pendulum [m]
-    float b = 0.1; // Damping []
+    float b = 0.3; // Damping []
     float theta0 = 3.14/2; // Initial angle of pendulum
     float omega0 = 0; // Initial angular velocity
     float theta = theta0;
