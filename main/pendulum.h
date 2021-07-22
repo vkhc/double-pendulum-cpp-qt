@@ -3,24 +3,17 @@
 
 #include <QPainter>
 
-class Pendulum {
-public:
-    virtual void drawPendulum(QPainter& qp) = 0;
-    virtual void stepAdvance(float tStep) = 0;
-
-protected:
-    float g = 9.81; // Gravitational acceleration
-
-};
 
 
-class SinglePendulum : public Pendulum {
+
+class SinglePendulum {
 public:
     void drawPendulum(QPainter& qp);
     void stepAdvance(float tStep);
     
 
 private:
+    float g = 9.81; // Gravitational acceleration
     float m = 1; // Mass of bob [kg]
     float l = 1; // Length of pendulum [m]
     float b = 0.3; // Damping []

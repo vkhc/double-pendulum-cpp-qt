@@ -18,9 +18,8 @@ protected:
 
 
 private:
-    unique_ptr<Pendulum> pendulum;
+    unique_ptr<SinglePendulum> pendulum;
     int tStep = 10; // Time step [ms]
     int timerId;
-
 
 };
