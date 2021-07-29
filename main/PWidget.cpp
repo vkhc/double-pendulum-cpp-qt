@@ -73,26 +73,45 @@ void PendulumWidget::tracePendulum() {
     
 }
 
-void PendulumWidget::drawTrace(QPainter& qp) {
+void PendulumWidget::drawTrace(QPainter& qp, deque<QPoint> D, QColor color) { // Add color as a parameter
+    int tail = traceLength;
     qp.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    QPen pen(Qt::green, 3);
+    QPen pen(color, 3);
     qp.setPen(pen);
     QLine line;
-    for (int i=1; i<trace.size(); ++i) {
-        // qp.drawPoint(trace[i]);
-        line.setP1(trace[i]);
-        line.setP2(trace[i-1]);
+    
+    int red = color.red();      // Get rgb values of input color
+    int green = color.green();  // to use them for fading tail
+    int blue = color.blue();    // in the loop below
+
+    int n = 2;
+    for (int i=n+6; i<D.size(); i+=n) { // By setting i to more than 0, trace will be behind the ball
+        // qp.drawPoint(D[i]);
+        line.setP1(D[i]);
+        line.setP2(D[i-n]);
+        // Add fading tail
+        if (i > traceLength - tail) {
+            // Function to give 1 at beginning of tail and 0 at the end of the line
+            float y = -1.0f / traceLength * (i - (traceLength - tail)) + 1; 
+
+            color.setRed(y * red);
+            color.setGreen(y * green);
+            color.setBlue(y * blue);
+
+            pen.setColor(color);
+            qp.setPen(pen);
+        }
         qp.drawLine(line);
     }
 }
-
 
 void PendulumWidget::paintEvent(QPaintEvent* e) {
     Q_UNUSED(e);
     
     QPainter qp(this);
+    drawTrace(qp ,trace, Qt::green);
     drawPendulum(qp);  
-    drawTrace(qp);
+    
 }
 
 void PendulumWidget::timerEvent(QTimerEvent* e) {

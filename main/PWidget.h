@@ -18,7 +18,7 @@ public:
     PendulumWidget(QWidget* parent = nullptr);
 
     void drawPendulum(QPainter& qp);
-    void drawTrace(QPainter& qp);
+    void drawTrace(QPainter& qp, deque<QPoint> D, QColor color);
     void tracePendulum();
 
 protected:
@@ -41,7 +41,7 @@ private:
     int bob2Y;
 
     deque<QPoint> trace;
-    int traceLength = 200;
+    int traceLength = 100;
 
 
     bool traceP = false;
