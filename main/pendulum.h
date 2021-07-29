@@ -47,6 +47,8 @@ public:
     void setTheta2(double x) { theta2 = x; }
     void setOmega2 (double x) { omega2 = x;}
 
+    void addToTheta1 (double angle) { theta1 += angle;}
+    void addToTheta2 (double angle) { theta2 += angle;}
     
 
 private:
@@ -57,8 +59,8 @@ private:
     double l2 = 1.0; // Length of the second pendulum [m]
     double theta1 = 3.14; // Angle of the first pendulum [rad]
     double theta2 = -3.14/2; // Angle of the second pendulum [rad]
-    double omega1; // Angular velocity of the first pendulum [rad/s]
-    double omega2; // Angular velocity of the second pendulum [rad/s]
+    double omega1 = 0; // Angular velocity of the first pendulum [rad/s]
+    double omega2 = 0; // Angular velocity of the second pendulum [rad/s]
 };
 
 
