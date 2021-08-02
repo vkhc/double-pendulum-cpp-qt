@@ -1,11 +1,11 @@
 #include <QApplication>
-#include <pWidget.h>
+#include <mainwidget.h>
 
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
-    PendulumWidget w;
+    MainWidget w;
     w.show();
 
     return app.exec();
