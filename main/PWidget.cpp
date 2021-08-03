@@ -9,8 +9,8 @@
 
 
 
-PendulumWidget::PendulumWidget(QWidget* parent) : QWidget(parent),
-                                                  pendulum(new DoublePendulum) {
+PendulumWidget::PendulumWidget(DoublePendulum* pPendulum, QWidget* parent) : QWidget(parent),
+                                                  pendulum(pPendulum) {
     // TODO: Orginize stylesheets properly
     setStyleSheet("background-color: black;");
     // TODO: Dynamic screen size?
@@ -40,18 +40,24 @@ void PendulumWidget::init() {
     bob2.setY(bob1.y() + l2 * cos(theta2) * scaleFactor);
     bob2.setX(bob1.x() + l2 * sin(theta2) * scaleFactor);
     // Set bob size according
-    bobRadius = (l1 + l2) / 20 * scaleFactor;
+    bobRadius = 20 / (l1 +l2);
 }
 
-void PendulumWidget::drawPendulum(QPainter& qp) {
-
-    init();
-
-    QPen pen(Qt::gray, 5, Qt::SolidLine);
+void PendulumWidget::drawRod1(QPainter& qp, QPen& pen) {
+    pen.setColor(Qt::gray);
+    pen.setWidth(3);
     qp.setPen(pen);
-
     qp.drawLine(pivot, bob1); // Pendulum 1
-    qp.drawLine(bob1, bob2); // Pendulum 2
+}
+
+void PendulumWidget::drawRod2(QPainter& qp, QPen& pen) {
+    pen.setColor(Qt::gray);
+    pen.setWidth(3);
+    qp.setPen(pen);
+    qp.drawLine(bob1, bob2); // Pendulum 1
+}
+
+void PendulumWidget::drawBob1(QPainter& qp, QPen& pen) {
     pen.setColor(Qt::red);
     pen.setWidth(1);
     qp.setPen(pen);
@@ -61,12 +67,27 @@ void PendulumWidget::drawPendulum(QPainter& qp) {
     gradientBob1.setColorAt(1.0, Qt::red);
     qp.setBrush(gradientBob1);
     qp.drawEllipse(bob1, bobRadius, bobRadius);
+}
+
+void PendulumWidget::drawBob2(QPainter& qp, QPen& pen) {
+    pen.setColor(Qt::red);
+    pen.setWidth(1);
+    qp.setPen(pen);
     // Draw bob 2
     QRadialGradient gradientBob2(bob2.x(), bob2.y(), bobRadius);
     gradientBob2.setColorAt(0.0, Qt::white);
     gradientBob2.setColorAt(1.0, Qt::red);
     qp.setBrush(gradientBob2);
     qp.drawEllipse(bob2, bobRadius, bobRadius);
+}
+
+void PendulumWidget::drawPendulum(QPainter& qp) {
+    init();
+    QPen pen;
+    if (rod1Draw) drawRod1(qp, pen);
+    if (rod2Draw) drawRod2(qp, pen);
+    if (bob1Draw) drawBob1(qp, pen);
+    if (bob2Draw) drawBob2(qp, pen);
 }
 
 void PendulumWidget::tracePendulum() {
@@ -77,7 +98,7 @@ void PendulumWidget::tracePendulum() {
 void PendulumWidget::drawTrace(QPainter& qp, deque<QPoint> D, QColor color) {
     int tail = traceLength;
     qp.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    QPen pen(color, 3);
+    QPen pen(color, 2);
     qp.setPen(pen);
     QLine line;
     
@@ -85,7 +106,7 @@ void PendulumWidget::drawTrace(QPainter& qp, deque<QPoint> D, QColor color) {
     int green = color.green();  // to use them for fading tail
     int blue = color.blue();    // in the loop below
 
-    int n = 1;  // Every nth point in deque will be connected into a straight line
+    int n = 2;  // Every nth point in deque will be connected into a straight line
     for (int i=D.size()-1; i>n+6; i-=n) {   // Iterate in reverse order, so that head of the trace
                                             // is drawn after the tale
                                             // By setting i to more than 0, trace will be behind the ball
@@ -133,7 +154,7 @@ void PendulumWidget::timerEvent(QTimerEvent* e) {
 
 void PendulumWidget::mousePressEvent(QMouseEvent* e) {
     if (e->button() == Qt::LeftButton) {
-        int snapRadius = bobRadius * 3;
+        int snapRadius = scaleFactor * (pendulum->getL1() + pendulum->getL2()) / 3;
         last = e->position().toPoint();
         if (doSnap(last, bob1, snapRadius)) {
             mousePressed = true;

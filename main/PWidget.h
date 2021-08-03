@@ -13,9 +13,13 @@ using std::deque;
 
 class PendulumWidget : public QWidget {
 public:
-    PendulumWidget(QWidget* parent = nullptr);
+    PendulumWidget(DoublePendulum* pPendulum, QWidget* parent = nullptr);
 
     void init();
+    void drawRod1(QPainter& qp, QPen& pen);
+    void drawRod2(QPainter& qp, QPen& pen);
+    void drawBob1(QPainter& qp, QPen& pen);
+    void drawBob2(QPainter& qp, QPen& pen);
     void drawPendulum(QPainter& qp);
     void drawTrace(QPainter& qp, deque<QPoint> D, QColor color);
     void tracePendulum();
@@ -31,7 +35,14 @@ private:
     void moveBob1();
     void moveBob2();
 
-    unique_ptr<DoublePendulum> pendulum;
+public:
+    bool rod1Draw = true;
+    bool rod2Draw = true;
+    bool bob1Draw = true;
+    bool bob2Draw = true;
+
+private:
+    DoublePendulum* pendulum;
     int tStep = 15; // Time step [ms]
     int timerId;
 
