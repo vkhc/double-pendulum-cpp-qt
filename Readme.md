@@ -1,6 +1,6 @@
 # Double pendulum simulation with c++ and Qt6
 Double pendulum simulation using modern c++ and Qt6.
-![Screenshot 1](https://github.com/vkhc/double-pendulum-cpp-qt/tree/master/screenshots/scr1.png)
+![Screenshot 1](https://github.com/vkhc/double-pendulum-cpp-qt/blob/master/screenshots/scr1.PNG)
 ![Screenshot 2](./screenshots/scr2.png)
 ![Screenshot 3](./screenshots/scr3.png)
 
