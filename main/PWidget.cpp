@@ -6,9 +6,6 @@
 #include <cmath>
 
 
-
-
-
 PendulumWidget::PendulumWidget(DoublePendulum* pPendulum, QWidget* parent) : QWidget(parent),
                                                   pendulum(pPendulum) {
     // TODO: Orginize stylesheets properly
@@ -22,7 +19,6 @@ PendulumWidget::PendulumWidget(DoublePendulum* pPendulum, QWidget* parent) : QWi
     pivot.setY(HEIGHT / 2);
     init();
     traceBob2.push_front(bob2);
-
 }
 
 void PendulumWidget::init() {

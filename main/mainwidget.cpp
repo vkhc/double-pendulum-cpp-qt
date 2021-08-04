@@ -1,9 +1,6 @@
 #include "mainwidget.h"
 
 #include "PWidget.h"
-
-
-
 #include <QHBoxLayout>
 #include <QLabel>
 
@@ -16,8 +13,6 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent), pendulum(new DoublePe
     m1SliderInit();
     m2SliderInit();
     checkBoxesInit();
-
-
 
     connect(l1Slider, &QSlider::valueChanged, this, &setL1);
     connect(l2Slider, &QSlider::valueChanged, this, &setL2);
@@ -44,7 +39,6 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent), pendulum(new DoublePe
     mainLayout->addLayout(sliderLayout, 2);
     mainLayout->addWidget(pWidget, 3);
 }
-
 
 void MainWidget::setL1() {
     double curL1 = pendulum->getL1();
@@ -117,9 +111,6 @@ void MainWidget::bob1Trace(int state) {
     if (state == Qt::Checked) pWidget->bob1Trace = true;
     else pWidget->bob1Trace = false;
 }
-
-
-
 
 void MainWidget::l1SliderInit() {
     l1Slider = new QSlider(Qt::Horizontal, this);
@@ -208,13 +199,10 @@ void MainWidget::checkBoxesInit() {
     bob2TraceCheck = new QCheckBox("Trace bob 2", this);
     // bob2TraceCheck->setCheckState(Qt::Checked);
 
-    
     checkBoxLayout->addWidget(rod1DrawCheck);
     checkBoxLayout->addWidget(rod2DrawCheck);
     checkBoxLayout->addWidget(bob1DrawCheck);
     checkBoxLayout->addWidget(bob2DrawCheck);
     checkBoxLayout->addWidget(bob1TraceCheck);
     checkBoxLayout->addWidget(bob2TraceCheck);
-
-
 }

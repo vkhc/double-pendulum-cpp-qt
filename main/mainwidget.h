@@ -8,13 +8,10 @@
 #include <QCheckBox>
 #include <QVBoxLayout>
 #include <QGridLayout>
-
-
 #include <memory>
 
 
 using std::unique_ptr;
-
 
 
 class MainWidget : public QWidget {
