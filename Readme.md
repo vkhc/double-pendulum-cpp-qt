@@ -1,8 +1,8 @@
 # Double pendulum simulation with c++ and Qt6
 Double pendulum simulation using modern c++ and Qt6.
 ![Screenshot 1](https://github.com/vkhc/double-pendulum-cpp-qt/blob/master/screenshots/scr1.PNG)
-![Screenshot 2](./screenshots/scr2.png)
-![Screenshot 3](./screenshots/scr3.png)
+![Screenshot 2](https://github.com/vkhc/double-pendulum-cpp-qt/blob/master/screenshots/scr2.PNG)
+![Screenshot 3](https://github.com/vkhc/double-pendulum-cpp-qt/blob/master/screenshots/scr3.PNG)
 
 ## Numerical solution of ODEs
 Semi-implicit Euler method very small time steps (0.15 ms) is used for integration of ODE.
