@@ -21,7 +21,7 @@ PendulumWidget::PendulumWidget(DoublePendulum* pPendulum, QWidget* parent) : QWi
     pivot.setX(WIDTH / 2);
     pivot.setY(HEIGHT / 2);
     init();
-    trace.push_front(bob2);
+    traceBob2.push_front(bob2);
 
 }
 
@@ -90,15 +90,15 @@ void PendulumWidget::drawPendulum(QPainter& qp) {
     if (bob2Draw) drawBob2(qp, pen);
 }
 
-void PendulumWidget::tracePendulum() {
-    trace.push_front(bob2);
-    if (trace.size() >= traceLength) trace.pop_back();   
+void PendulumWidget::tracePendulum(QPoint point, deque<QPoint>& D) {
+    D.push_front(point);
+    if (D.size() >= traceLength) D.pop_back();
 }
 
 void PendulumWidget::drawTrace(QPainter& qp, deque<QPoint> D, QColor color) {
     int tail = traceLength;
     qp.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    QPen pen(color, 2);
+    QPen pen(color, 2, Qt::SolidLine, Qt::RoundCap);
     qp.setPen(pen);
     QLine line;
     
@@ -106,7 +106,7 @@ void PendulumWidget::drawTrace(QPainter& qp, deque<QPoint> D, QColor color) {
     int green = color.green();  // to use them for fading tail
     int blue = color.blue();    // in the loop below
 
-    int n = 2;  // Every nth point in deque will be connected into a straight line
+    int n = 1;  // Every nth point in deque will be connected into a straight line
     for (int i=D.size()-1; i>n+6; i-=n) {   // Iterate in reverse order, so that head of the trace
                                             // is drawn after the tale
                                             // By setting i to more than 0, trace will be behind the ball
@@ -132,17 +132,19 @@ void PendulumWidget::paintEvent(QPaintEvent* e) {
     Q_UNUSED(e);
     
     QPainter qp(this);
-    drawTrace(qp ,trace, Qt::red);
+    if (bob1Trace) drawTrace(qp,traceBob1, Qt::green);
+    if (bob2Trace) drawTrace(qp ,traceBob2, Qt::red);
     drawPendulum(qp);   
 }
 
 void PendulumWidget::timerEvent(QTimerEvent* e) {
     Q_UNUSED(e);
     if (!mousePressed) {
-        tracePendulum();
+        tracePendulum(bob1, traceBob1);
+        tracePendulum(bob2, traceBob2);
         // Divide timerEvent interval by reductionFactor to get small enough
         // Time steps for euler methods
-        int reductionFactor = 50;
+        int reductionFactor = 100;
         float t = (float)tStep/reductionFactor;
         // Do numerical approximation reductionFactor times
         for (int i=0; i<reductionFactor; ++i) { //

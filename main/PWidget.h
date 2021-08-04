@@ -22,7 +22,7 @@ public:
     void drawBob2(QPainter& qp, QPen& pen);
     void drawPendulum(QPainter& qp);
     void drawTrace(QPainter& qp, deque<QPoint> D, QColor color);
-    void tracePendulum();
+    void tracePendulum(QPoint point, deque<QPoint>& D);
 
 protected:
     void paintEvent(QPaintEvent* e) override;
@@ -40,17 +40,18 @@ public:
     bool rod2Draw = true;
     bool bob1Draw = true;
     bool bob2Draw = true;
+    bool bob1Trace = false;
+    bool bob2Trace = false;
 
 private:
-    DoublePendulum* pendulum;
-    int tStep = 15; // Time step [ms]
-    int timerId;
-
     const int WIDTH = 800;
     const int HEIGHT = 600;
+    
+    int tStep = 15; // Time step [ms]
     float scaleFactor;
     int bobRadius;
 
+    DoublePendulum* pendulum;
     QPoint pivot;
     QPoint bob1;
     QPoint bob2;
@@ -58,13 +59,14 @@ private:
     QPoint last;
     QPoint current;
 
-    deque<QPoint> trace;
+    deque<QPoint> traceBob1;
+    deque<QPoint> traceBob2;
     int traceLength = 100;
     
     // State vatiables
-    bool traceP = false;
     bool mousePressed = false;
     bool bob1Snaped = false;
     bool bob2Snaped = false;
 
+    int timerId;
 };
