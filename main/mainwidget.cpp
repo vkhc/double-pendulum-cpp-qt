@@ -14,17 +14,17 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent), pendulum(new DoublePe
     m2SliderInit();
     checkBoxesInit();
 
-    connect(l1Slider, &QSlider::valueChanged, this, &setL1);
-    connect(l2Slider, &QSlider::valueChanged, this, &setL2);
-    connect(m1Slider, &QSlider::valueChanged, this, &setM1);
-    connect(m2Slider, &QSlider::valueChanged, this, &setM2);
+    connect(l2Slider, &QSlider::valueChanged, this, &MainWidget::setL2);
+    connect(l1Slider, &QSlider::valueChanged, this, &MainWidget::setL1);
+    connect(m1Slider, &QSlider::valueChanged, this, &MainWidget::setM1);
+    connect(m2Slider, &QSlider::valueChanged, this, &MainWidget::setM2);
 
-    connect(rod1DrawCheck, &QCheckBox::stateChanged, this, &rod1Draw);
-    connect(rod2DrawCheck, &QCheckBox::stateChanged, this, &rod2Draw);
-    connect(bob1DrawCheck, &QCheckBox::stateChanged, this, &bob1Draw);
-    connect(bob2DrawCheck, &QCheckBox::stateChanged, this, &bob2Draw);
-    connect(bob1TraceCheck, &QCheckBox::stateChanged, this, &bob1Trace);
-    connect(bob2TraceCheck, &QCheckBox::stateChanged, this, &bob2Trace);
+    connect(rod1DrawCheck, &QCheckBox::stateChanged, this, &MainWidget::rod1Draw);
+    connect(rod2DrawCheck, &QCheckBox::stateChanged, this, &MainWidget::rod2Draw);
+    connect(bob1DrawCheck, &QCheckBox::stateChanged, this, &MainWidget::bob1Draw);
+    connect(bob2DrawCheck, &QCheckBox::stateChanged, this, &MainWidget::bob2Draw);
+    connect(bob1TraceCheck, &QCheckBox::stateChanged, this, &MainWidget::bob1Trace);
+    connect(bob2TraceCheck, &QCheckBox::stateChanged, this, &MainWidget::bob2Trace);
     
     auto* mainLayout = new QHBoxLayout(this);
     auto* sliderLayout = new QVBoxLayout;
