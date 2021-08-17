@@ -21,4 +21,5 @@ In terms of OOP some refactoring is probably needed.
 4. Build the project by running `cmake --build .`
 5. Copy media folder to the location of executable.
 
-ON WINDOWS: You will probably need to copy Qt DLLs to executable folder as well.
+ON WINDOWS: You will probably need to copy Qt DLLs to executable folder as well,
+            or add Qt to PATH.

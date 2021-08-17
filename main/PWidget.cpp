@@ -91,6 +91,7 @@ void PendulumWidget::tracePendulum(QPoint point, deque<QPoint>& D) {
     if (D.size() >= traceLength) D.pop_back();
 }
 
+// Algorith for tracing pendulum
 void PendulumWidget::drawTrace(QPainter& qp, deque<QPoint> D, QColor color) {
     int tail = traceLength;
     qp.setRenderHint(QPainter::SmoothPixmapTransform, true);

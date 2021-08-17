@@ -27,5 +27,6 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets
 set(CMAKE_EXE_LINKER_FLAGS -no-pie) # Without this wont run as exe on linux 
 
 
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/main)
 
