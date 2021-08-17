@@ -32,7 +32,7 @@ void SinglePendulum::stepAdvance(float tStep) {
 }
 
 
-
+// TODO : add other solvers as well
 void DoublePendulum::stepAdvanceEuler(float tStep) {
     // Euler method produces bad approximation so very small time steps should be used
     double dt = tStep / 1000.0; // Convert to seconds

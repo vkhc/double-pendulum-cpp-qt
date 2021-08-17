@@ -7,7 +7,7 @@
 
 MainWidget::MainWidget(QWidget* parent) : QWidget(parent), pendulum(new DoublePendulum) {
     pWidget = new PendulumWidget(pendulum.get(), this);
-
+    // Initialize sliders and checkboxes
     l1SliderInit();
     l2SliderInit();
     m1SliderInit();

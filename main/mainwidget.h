@@ -39,8 +39,8 @@ private slots:
     void bob2Trace(int state);
 
 private:
-    unique_ptr<DoublePendulum> pendulum;
-    PendulumWidget* pWidget;
+    unique_ptr<DoublePendulum> pendulum; // Pointer to pendulum
+    PendulumWidget* pWidget; // Pointer to pWidget which draws pendulum
     
     QSlider* l1Slider;
     QLabel* l1Label;

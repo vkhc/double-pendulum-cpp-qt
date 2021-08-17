@@ -16,6 +16,7 @@ float getAngle(QLine& l1, QLine& l2) { // Get angle between two lines
     return -asinf(crossProduct / (l1Length  * l2Length));
 }
 
+// Check if input point is within reach radius of target
 bool doSnap(QPoint& mouse, QPoint& target, int radius) {
     QPoint diff = target - mouse;
     if (abs(diff.x()) < radius && abs(diff.y()) < radius) return true;

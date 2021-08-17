@@ -53,7 +53,7 @@ public:
     
 
 private:
-    double g = 9.80; // Gravitational acceleration
+    double g = 9.80; // Gravitational acceleration [m/s^2]
     double m1 = 2; // Mass of first bob [kg]
     double m2 = 2; // Mass of second bob [kg]
     double l1 = 1.0; // Length of the first pendulum [m]
