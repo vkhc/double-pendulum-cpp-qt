@@ -5,7 +5,7 @@ Double pendulum simulation using modern c++ and Qt6.
 ![Screenshot 3](https://github.com/vkhc/double-pendulum-cpp-qt/blob/master/screenshots/scr3.PNG)
 
 ## Numerical solution of ODEs
-Semi-implicit Euler method very small time steps (0.15 ms) is used for integration of ODE.
+Semi-implicit Euler method with a very small time step (0.15 ms) is used for integration of ODE.
 Thus long simulation times won't be accurate. For accurate long term solutions some sympletic
 integrator should be implemented.
 
